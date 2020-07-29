@@ -1,16 +1,14 @@
 //TODO: ADD DOCUMENTATION
 
 use std::io;
-use std::str::FromStr;
 use std::io::Write;
+use std::str::FromStr;
 
-const OPERATORS: &str =
-    "Available Operators:\n\
+const OPERATORS: &str = "Available Operators:\n\
     +   Addition\n\
     -   Subtraction\n\
     *   Multiplication\n\
     /   Division\n";
-
 
 struct Numbers {
     x: f64,
@@ -19,7 +17,7 @@ struct Numbers {
 
 impl Numbers {
     fn new(x: f64, y: f64) -> Self {
-        Numbers {x, y}
+        Numbers { x, y }
     }
     fn add(&self) -> f64 {
         self.x + self.y
@@ -73,8 +71,10 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
 
     if args.len() <= 1 {
-        print!("Welcome to ZigTag's calculator\n\
-            Please enter a symbol: ");
+        print!(
+            "Welcome to ZigTag's calculator\n\
+            Please enter a symbol: "
+        );
         io::stdout().flush().unwrap();
         let mut symbol: char;
 
@@ -102,19 +102,18 @@ fn main() {
         let numbers = Numbers::new(first_number, second_number);
 
         numbers.do_math(symbol);
-    }
-    else if args.len() == 2 {
+    } else if args.len() == 2 {
         if args[1] == "-h" || args[1] == "--help" {
-            println!("ZigTag's Calculator\n\
+            println!(
+                "ZigTag's Calculator\n\
                 Usage: calculator <first_number> <second_number> <symbol>\n\
-                {}", OPERATORS
+                {}",
+                OPERATORS
             )
         }
-    }
-    else if args.len() <= 3 {
+    } else if args.len() <= 3 {
         println!("You need 3 arguments.");
-    }
-    else if args.len() == 4 {
+    } else if args.len() == 4 {
         let first_number: f64 = auto_parse(args[1].clone());
         let second_number: f64 = auto_parse(args[2].clone());
         let symbol: char = auto_parse(args[3].clone());
@@ -122,10 +121,7 @@ fn main() {
         let numbers = Numbers::new(first_number, second_number);
 
         numbers.do_math(symbol);
-    }
-    else {
+    } else {
         println!("Too many arguments.")
     }
-
-
 }
